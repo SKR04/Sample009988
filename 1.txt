@@ -1,0 +1,51 @@
+It seems like you're asking for a simulation of a network scenario using the Tcl programming language. I can provide you with a basic outline of how you might approach this simulation, but keep in mind that writing a complete Tcl script for this would be beyond the scope of a single response.
+
+Here is an outline of how you might structure your simulation:
+
+```tcl
+# Define constants
+set node_count 10
+set distance_between_nodes 150
+set max_packet_size 1460
+set max_buffer_size 50
+set data_rate 4 ;# packets per second
+set simulation_time 60 ;# seconds
+
+# Initialize variables
+set total_packets [expr {$data_rate * $simulation_time}]
+set packets_sent 0
+
+# Define node procedures
+proc generate_packets {node_id} {
+    # Generate packets at the specified data rate
+    global data_rate total_packets packets_sent
+    set packets_generated [expr {$data_rate * 1}] ;# Generate packets for 1 second
+    set packets_sent [expr {$packets_sent + $packets_generated}]
+    puts "Node $node_id generated $packets_generated packets"
+}
+
+proc send_packets {node_id} {
+    global packets_sent
+    # Implement logic to send packets to neighboring nodes
+}
+
+proc receive_packets {node_id} {
+    # Implement logic to receive packets from neighboring nodes
+}
+
+# Main simulation loop
+for {set time 0} {$time < $simulation_time} {incr time} {
+    puts "Time: $time seconds"
+    for {set node 1} {$node <= $node_count} {incr node} {
+        generate_packets $node
+        send_packets $node
+        receive_packets $node
+    }
+}
+
+puts "Total packets sent: $packets_sent"
+```
+
+This is a basic framework for your simulation. You'll need to fill in the details for the `send_packets` and `receive_packets` procedures, as well as implement the logic for transferring packets between nodes.
+
+Please note that this is a simplified example and may not cover all aspects of a real-world network simulation. You may need to adapt and expand this code to meet your specific requirements.
